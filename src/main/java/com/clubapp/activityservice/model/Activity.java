@@ -1,10 +1,9 @@
 package com.clubapp.activityservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,6 +11,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "activities")
 public class Activity {
 
     @Id
@@ -19,4 +19,11 @@ public class Activity {
     private Long id;
     private String name;
     private String type;
+    private String description;
+    @OneToMany
+    private List<ActivityLinks> activityLinks;
+    @OneToMany
+    private List<ActivityPrices> activityPrices;
+//    private Schedule schedule;
+//    private UserTeam userTeam;
 }
