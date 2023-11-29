@@ -17,5 +17,7 @@ public class ActivityPrices {
     private Long id;
     private String name;
     private double price;
-    private Long activityId;
+    @ManyToOne
+    @JoinColumn(name="activity_id", nullable=false)
+    private Activity activity;
 }

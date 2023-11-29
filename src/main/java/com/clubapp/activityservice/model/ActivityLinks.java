@@ -17,5 +17,7 @@ public class ActivityLinks {
     private Long id;
     private String name;
     private String link;
-    private Long activityId;
+    @ManyToOne
+    @JoinColumn(name="activity_id", nullable=false)
+    private Activity activity;
 }

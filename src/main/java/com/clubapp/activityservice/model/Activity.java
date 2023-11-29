@@ -20,10 +20,8 @@ public class Activity {
     private String name;
     private String type;
     private String description;
-    @OneToMany
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
     private List<ActivityLinks> activityLinks;
-    @OneToMany
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
     private List<ActivityPrices> activityPrices;
-//    private Schedule schedule;
-//    private UserTeam userTeam;
 }
