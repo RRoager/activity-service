@@ -24,8 +24,8 @@ import java.time.Instant;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "links")
-public class ActivityLinks {
+@Table(name = "prices")
+public class Prices {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class ActivityLinks {
     @UpdateTimestamp(source = SourceType.DB)
     private Instant lastUpdatedOn;
     private String name;
-    private String link;
+    private double price;
     @ManyToOne
     @JoinColumn(name="activity_id", nullable=false)
     private Activity activity;
