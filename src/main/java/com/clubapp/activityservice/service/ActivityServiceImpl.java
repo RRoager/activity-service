@@ -39,16 +39,6 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     /**
-     * Get team activity by id
-     * @param id Activity id
-     * @return Optional Activity
-     */
-    @Override
-    public Optional<Activity> getTeamById(Long id) {
-        return Optional.ofNullable(activityRepository.findByTypeInById(teams, id));
-    }
-
-    /**
      * Get Activity based on Activity id
      * @param id Activity id
      * @return Optional Activity
@@ -66,17 +56,6 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Optional<List<Activity>> getActivitiesByType(Type type) {
         return Optional.ofNullable(activityRepository.findAllByType(type));
-    }
-
-    /**
-     * Get Activity of a specific type by id
-     * @param type Activity type
-     * @param id Activity id
-     * @return Optional Activity
-     */
-    @Override
-    public Optional<Activity> getActivityByTypeAndId(Type type, Long id) {
-        return Optional.ofNullable(activityRepository.findByTypeAndId(type, id));
     }
 
     /**

@@ -10,9 +10,5 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     List<Activity> findAllByType(Type type);
 
-    Activity findByTypeAndId(Type type,Long id);
-
     List<Activity> findByTypeIn(List<Type> teams);
-
-    Activity findByTypeInById(List<Type> teams, Long id);
 }
