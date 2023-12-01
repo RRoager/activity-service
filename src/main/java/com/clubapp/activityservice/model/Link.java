@@ -26,7 +26,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 @Table(name = "links")
-public class ActivityLinks {
+public class Link {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

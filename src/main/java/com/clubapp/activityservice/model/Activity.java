@@ -43,7 +43,7 @@ public class Activity {
     @NotNull
     private Type type;
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<ActivityLinks> activityLinks;
+    private List<Link> links;
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<ActivityPrices> activityPrices;
+    private List<Price> prices;
 }

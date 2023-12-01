@@ -25,7 +25,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 @Table(name = "prices")
-public class ActivityPrices {
+public class Price {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
