@@ -1,13 +1,12 @@
 package com.clubapp.activityservice.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +17,6 @@ import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
-import java.util.List;
 
 @Entity
 @Getter
@@ -26,8 +24,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "activities")
-public class Activity {
+@Table(name = "prices")
+public class Price {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,14 +34,9 @@ public class Activity {
     private Instant createdOn;
     @UpdateTimestamp(source = SourceType.DB)
     private Instant lastUpdatedOn;
-    @NotNull
     private String name;
-    @NotNull
-    private String description;
-    @NotNull
-    private Type type;
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<Link> links;
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<Price> prices;
+    private double price;
+    @ManyToOne
+    @JoinColumn(name="activity_id", nullable=false)
+    private Activity activity;
 }
