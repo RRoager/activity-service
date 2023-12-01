@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,9 +36,12 @@ public class Activity {
     private Instant createdOn;
     @UpdateTimestamp(source = SourceType.DB)
     private Instant lastUpdatedOn;
+    @NotNull
     private String name;
-    private String type;
+    @NotNull
     private String description;
+    @NotNull
+    private Type type;
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
     private List<ActivityLinks> activityLinks;
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)

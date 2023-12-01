@@ -1,9 +1,11 @@
 package com.clubapp.activityservice.service;
 
 import com.clubapp.activityservice.model.Activity;
+import com.clubapp.activityservice.model.Type;
 import com.clubapp.activityservice.repository.ActivityRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,13 +13,15 @@ import java.util.Optional;
 public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityRepository activityRepository;
+    private final List<Type> teams = Arrays.asList(Type.ACROBATICS, Type.FITNESS, Type.PERFORMANCE, Type.TEAM_GYM);
+
 
     public ActivityServiceImpl(ActivityRepository activityRepository) {
         this.activityRepository = activityRepository;
     }
 
     /**
-     * Get all activities from repository
+     * Get all activities
      * @return list containing all activities
      */
     @Override
@@ -26,13 +30,22 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     /**
-     * Get Activity based on Activity name
-     * @param name Activity name
+     * Get all team activities
+     * @return Optional list of activities
+     */
+    @Override
+    public Optional<List<Activity>> getTeams() {
+        return Optional.ofNullable(activityRepository.findByTypeIn(teams));
+    }
+
+    /**
+     * Get team activity by id
+     * @param id Activity id
      * @return Optional Activity
      */
     @Override
-    public Optional<Activity> getActivitiesByName(String name) {
-        return Optional.ofNullable(activityRepository.findByName(name));
+    public Optional<Activity> getTeamById(Long id) {
+        return Optional.ofNullable(activityRepository.findByTypeInById(teams, id));
     }
 
     /**
@@ -51,20 +64,28 @@ public class ActivityServiceImpl implements ActivityService {
      * @return Optional list of activities
      */
     @Override
-    public Optional<List<Activity>> getActivitiesByType(String type) {
+    public Optional<List<Activity>> getActivitiesByType(Type type) {
         return Optional.ofNullable(activityRepository.findAllByType(type));
     }
 
     /**
-     * Save new Activity to database if name is not present already
+     * Get Activity of a specific type by id
+     * @param type Activity type
+     * @param id Activity id
+     * @return Optional Activity
+     */
+    @Override
+    public Optional<Activity> getActivityByTypeAndId(Type type, Long id) {
+        return Optional.ofNullable(activityRepository.findByTypeAndId(type, id));
+    }
+
+    /**
+     * Save new Activity to database
      * @param Activity Activity object
      * @return Activity
      */
     @Override
     public Activity saveActivity(Activity Activity) {
-        if (getActivitiesByName(Activity.getName()).isPresent())
-            return null;
-
         return activityRepository.save(Activity);
     }
 

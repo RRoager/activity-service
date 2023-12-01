@@ -1,6 +1,7 @@
 package com.clubapp.activityservice.controller;
 
 import com.clubapp.activityservice.model.Activity;
+import com.clubapp.activityservice.model.Type;
 import com.clubapp.activityservice.service.ActivityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,22 +25,32 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    @GetMapping("/activities")
+    @GetMapping("/")
     public ResponseEntity<List<Activity>> getActivities() {
         return ResponseEntity.ok(activityService.getActivities());
     }
 
-    @GetMapping("/activities/{type}")
-    public ResponseEntity<List<Activity>> getActivitiesByType(@PathVariable String type) {
+    @GetMapping("/teams")
+    public ResponseEntity<List<Activity>> getTeams() {
+        return ResponseEntity.of(activityService.getTeams());
+    }
+
+    @GetMapping("/teams/{id}")
+    public ResponseEntity<Activity> getTeamById(@PathVariable Long id) {
+        return ResponseEntity.of(activityService.getTeamById(id));
+    }
+
+    @GetMapping("/{type}")
+    public ResponseEntity<List<Activity>> getActivitiesByType(@PathVariable Type type) {
         return ResponseEntity.of(activityService.getActivitiesByType(type));
     }
 
-    @GetMapping("/activity/{name}")
-    public ResponseEntity<Activity> getActivitiesByName(@PathVariable String name) {
-        return ResponseEntity.of(activityService.getActivitiesByName(name));
+    @GetMapping("/{type}/{id}")
+    public ResponseEntity<Activity> getActivityByTypeAndId(@PathVariable Type type, @PathVariable Long id) {
+        return ResponseEntity.of(activityService.getActivityByTypeAndId(type, id));
     }
 
-    @PostMapping("/activity")
+    @PostMapping("/")
     public ResponseEntity<Activity> createActivity(@RequestBody Activity Activity) {
         Activity newActivity = activityService.saveActivity(Activity);
         if (newActivity != null) {
@@ -48,12 +59,12 @@ public class ActivityController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PutMapping("/activity/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Activity> updateActivity(@PathVariable Long id, @RequestBody Activity Activity) {
         return ResponseEntity.ofNullable(activityService.updateActivity(id, Activity));
     }
 
-    @DeleteMapping("/activity/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteActivity(@PathVariable Long id) {
         if (activityService.deleteActivity(id)) {
             return ResponseEntity.ok("Deleted Activity with ID: " + id);

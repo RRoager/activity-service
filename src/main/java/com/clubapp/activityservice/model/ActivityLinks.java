@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +35,9 @@ public class ActivityLinks {
     private Instant createdOn;
     @UpdateTimestamp(source = SourceType.DB)
     private Instant lastUpdatedOn;
+    @NotNull
     private String name;
+    @NotNull
     private String link;
     @ManyToOne
     @JoinColumn(name="activity_id", nullable=false)
