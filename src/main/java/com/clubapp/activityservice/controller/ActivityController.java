@@ -35,19 +35,14 @@ public class ActivityController {
         return ResponseEntity.of(activityService.getTeams());
     }
 
-    @GetMapping("/teams/{id}")
-    public ResponseEntity<Activity> getTeamById(@PathVariable Long id) {
-        return ResponseEntity.of(activityService.getTeamById(id));
+    @GetMapping("/{id}")
+    public ResponseEntity<Activity> getActivityById(@PathVariable Long id) {
+        return ResponseEntity.of(activityService.getActivityById(id));
     }
 
     @GetMapping("/{type}")
     public ResponseEntity<List<Activity>> getActivitiesByType(@PathVariable Type type) {
         return ResponseEntity.of(activityService.getActivitiesByType(type));
-    }
-
-    @GetMapping("/{type}/{id}")
-    public ResponseEntity<Activity> getActivityByTypeAndId(@PathVariable Type type, @PathVariable Long id) {
-        return ResponseEntity.of(activityService.getActivityByTypeAndId(type, id));
     }
 
     @PostMapping("/")

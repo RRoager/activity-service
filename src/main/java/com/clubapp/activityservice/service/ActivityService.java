@@ -14,8 +14,6 @@ public interface ActivityService {
 
     Optional<List<Activity>> getActivitiesByType(Type type);
 
-    Optional<Activity> getActivityByTypeAndId(Type type, Long id);
-
     Activity saveActivity(Activity Activity);
 
     Activity updateActivity(Long id, Activity Activity);
@@ -23,6 +21,4 @@ public interface ActivityService {
     boolean deleteActivity(Long id);
 
     Optional<List<Activity>> getTeams();
-
-    Optional<Activity> getTeamById(Long id);
 }
