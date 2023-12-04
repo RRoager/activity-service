@@ -82,6 +82,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>activity-service</finalName>
 	</build>
 	<repositories>
 		<repository>
