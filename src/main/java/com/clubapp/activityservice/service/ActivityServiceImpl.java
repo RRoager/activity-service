@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -54,8 +55,14 @@ public class ActivityServiceImpl implements ActivityService {
      * @return Optional list of activities
      */
     @Override
-    public Optional<List<Activity>> getActivitiesByType(Type type) {
-        return Optional.ofNullable(activityRepository.findAllByType(type));
+    public Optional<List<Activity>> getActivitiesByType(String type) {
+        if (Stream.of(Type.values())
+                .map(Type::name)
+                .toList()
+                .contains(type.toUpperCase().trim())) {
+            return Optional.ofNullable(activityRepository.findAllByType(Type.valueOf(type.toUpperCase().trim())));
+        }
+        return Optional.empty();
     }
 
     /**

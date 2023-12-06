@@ -41,7 +41,7 @@ public class ActivityController {
     }
 
     @GetMapping("/type/{type}")
-    public ResponseEntity<List<Activity>> getActivitiesByType(@PathVariable Type type) {
+    public ResponseEntity<List<Activity>> getActivitiesByType(@PathVariable String type) {
         return ResponseEntity.of(activityService.getActivitiesByType(type));
     }
 
