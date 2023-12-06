@@ -12,7 +12,7 @@ public interface ActivityService {
 
     Optional<Activity> getActivityById(Long id);
 
-    Optional<List<Activity>> getActivitiesByType(Type type);
+    Optional<List<Activity>> getActivitiesByType(String type);
 
     Activity saveActivity(Activity Activity);
 
