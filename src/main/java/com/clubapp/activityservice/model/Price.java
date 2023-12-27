@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
@@ -30,13 +29,12 @@ public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @CreationTimestamp(source = SourceType.DB)
+    @CreationTimestamp
     private Instant createdOn;
-    @UpdateTimestamp(source = SourceType.DB)
+    @UpdateTimestamp
     private Instant lastUpdatedOn;
-    private String name;
     private double price;
     @ManyToOne
-    @JoinColumn(name="activity_id", nullable=false)
+    @JoinColumn(name = "activity_id", nullable = false)
     private Activity activity;
 }

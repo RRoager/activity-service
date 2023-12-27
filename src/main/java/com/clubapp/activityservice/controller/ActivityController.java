@@ -3,6 +3,8 @@ package com.clubapp.activityservice.controller;
 import com.clubapp.activityservice.model.Activity;
 import com.clubapp.activityservice.model.Type;
 import com.clubapp.activityservice.service.ActivityService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,17 +48,17 @@ public class ActivityController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Activity> createActivity(@RequestBody Activity Activity) {
-        Activity newActivity = activityService.saveActivity(Activity);
+    public ResponseEntity<?> createActivity(@RequestBody Activity activity) {
+        Activity newActivity = activityService.saveActivity(activity);
         if (newActivity != null) {
             return ResponseEntity.ok(newActivity);
         }
-        return ResponseEntity.badRequest().build();
+        return new ResponseEntity<>("Activity must have a name, description and type", HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Activity> updateActivity(@PathVariable Long id, @RequestBody Activity Activity) {
-        return ResponseEntity.ofNullable(activityService.updateActivity(id, Activity));
+    public ResponseEntity<Activity> updateActivity(@PathVariable Long id, @RequestBody Activity activity) {
+        return ResponseEntity.ofNullable(activityService.updateActivity(id, activity));
     }
 
     @DeleteMapping("/{id}")

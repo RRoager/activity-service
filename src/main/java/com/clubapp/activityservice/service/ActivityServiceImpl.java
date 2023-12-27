@@ -56,23 +56,36 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public Optional<List<Activity>> getActivitiesByType(String type) {
-        if (Stream.of(Type.values())
-                .map(Type::name)
-                .toList()
-                .contains(type.toUpperCase().trim())) {
+        if (validType(type)) {
             return Optional.ofNullable(activityRepository.findAllByType(Type.valueOf(type.toUpperCase().trim())));
         }
         return Optional.empty();
     }
 
+    private static boolean validType(String type) {
+        return Stream.of(Type.values())
+                .map(Type::name)
+                .toList()
+                .contains(type.toUpperCase().trim());
+    }
+
     /**
      * Save new Activity to database
-     * @param Activity Activity object
+     * @param activity Activity object
      * @return Activity
      */
     @Override
-    public Activity saveActivity(Activity Activity) {
-        return activityRepository.save(Activity);
+    public Activity saveActivity(Activity activity) {
+        if (allParamsPresent(activity)) {
+            return activityRepository.save(activity);
+        }
+        return null;
+    }
+
+    private static boolean allParamsPresent(Activity activity) {
+        return Optional.ofNullable(activity.getName()).isPresent() &&
+                Optional.ofNullable(activity.getDescription()).isPresent() &&
+                Optional.ofNullable(activity.getType()).isPresent();
     }
 
     /**

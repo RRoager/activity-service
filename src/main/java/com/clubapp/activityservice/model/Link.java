@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
@@ -31,9 +30,9 @@ public class Link {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @CreationTimestamp(source = SourceType.DB)
+    @CreationTimestamp
     private Instant createdOn;
-    @UpdateTimestamp(source = SourceType.DB)
+    @UpdateTimestamp
     private Instant lastUpdatedOn;
     @NotNull
     private String name;

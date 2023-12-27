@@ -1,6 +1,5 @@
 package com.clubapp.activityservice.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,7 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -41,13 +40,12 @@ public class Activity {
     @NotNull
     private String name;
     @NotNull
-    @Column(columnDefinition="LONGTEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
+    //    private String message;
     @NotNull
     @Enumerated(EnumType.STRING)
     private Type type;
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<Link> links;
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<Price> prices;
+    @OneToMany(mappedBy = "activity")
+    private Set<Price> prices;
 }

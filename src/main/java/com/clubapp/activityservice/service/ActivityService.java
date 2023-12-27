@@ -2,7 +2,6 @@ package com.clubapp.activityservice.service;
 
 
 import com.clubapp.activityservice.model.Activity;
-import com.clubapp.activityservice.model.Type;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +13,9 @@ public interface ActivityService {
 
     Optional<List<Activity>> getActivitiesByType(String type);
 
-    Activity saveActivity(Activity Activity);
+    Activity saveActivity(Activity activity);
 
-    Activity updateActivity(Long id, Activity Activity);
+    Activity updateActivity(Long id, Activity activity);
 
     boolean deleteActivity(Long id);
 
